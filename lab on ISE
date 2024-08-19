@@ -1,0 +1,275 @@
+LIBRARY ieee; 
+USE ieee.std_logic_1164.ALL; 
+  
+-- Uncomment the following library declaration if using -- arithmetic functions with Signed or Unsigned values 
+--USE ieee.numeric_std.ALL; 
+  
+ENTITY jk_ff_tb IS 
+END jk_ff_tb; 
+  
+ARCHITECTURE behavior OF jk_ff_tb IS 
+  
+    -- Component Declaration for the Unit Under Test (UUT) 
+  
+    COMPONENT jk_ff_2     PORT( 
+         s : IN  std_logic;          r : IN  std_logic;          clk : IN  std_logic;          q : OUT  std_logic; 
+         qbar : OUT  std_logic 
+        ); 
+    END COMPONENT; 
+    
+ 
+   --Inputs    signal s : std_logic := '0';    signal r : std_logic := '0'; 
+   signal clk : std_logic := '0'; 
+ 
+  --Outputs    signal q : std_logic; 
+   signal qbar : std_logic; 
+ 
+   -- Clock period definitions 
+   constant clk_period : time := 10 ns; 
+  
+BEGIN 
+  
+-- Instantiate the Unit Under Test (UUT) 
+   uut: jk_ff_2 PORT MAP ( 
+          s => s,           r => r,           clk => clk,           q => q,           qbar => qbar 
+        ); 
+ 
+   -- Clock process definitions    clk_process :process    begin clk <= '0'; wait for clk_period/2; 
+clk <= '1'; wait for clk_period/2;    end process; 
+  
+ 
+   -- Stimulus process    stim_proc: process    begin 
+      -- hold reset state for 100 ns. s<='0'; r<='0';       wait for 100 ns; 
+ 
+      s<='0'; r<='1';       wait for 100 ns; s<='1'; r<='0';       wait for 100 ns; s<='1'; r<='1'; 
+      wait for 100 ns; 
+ 
+      
+      -- insert stimulus here 
+ 
+      --wait; 
+   end process; 
+ 
+END; SR FF 
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. --library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity sr_ff_2 is     Port ( s : in  STD_LOGIC;            r : in  STD_LOGIC;            clk : in  STD_LOGIC;            q : out  STD_LOGIC;            qbar : out  STD_LOGIC); end sr_ff_2; 
+ 
+architecture Behavioral of sr_ff_2 is 
+ 
+begin 
+ 
+process(clk) variable temp :std_logic; begin 
+if(clk='1' and clk'event )then if(s='0' and r='0') then 
+temp:=temp; 
+elsif(s='1' and r='1') then temp:='Z'; 
+elsif(s='0' and r='1')then temp:='0'; else temp:='1'; end if; end if; 
+q<=temp; qbar<= not temp; end process; end Behavioral; 
+Show quoted text 
+ 
+rca structural model 
+ 
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. 
+--library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity RCA_str is 
+    Port (a, b:in std_logic_vector(3 downto 0); cin:in std_logic; s:out std_logic_vector(3 downto 0);cout3:out std_logic); 
+end RCA_str; 
+ 
+ 
+ 
+architecture structural of RCA_str is 
+ 
+ 
+component fulladder_stru 
+    Port ( x1,y1,z1 : in  STD_LOGIC;  sum ,carry: out  STD_LOGIC); end component; 
+ 
+signal r1,r2,r3:std_logic; 
+begin 
+ 
+t1:fulladder_stru port map(a(0),b(0),cin,s(0),r1); t2:fulladder_stru port map(a(1),b(1),r1,s(1),r2); t3:fulladder_stru port map(a(2),b(2),r2,s(2),r3); t4:fulladder_stru port map(a(3),b(3),r3,s(3),cout3); 
+ 
+end; 
+ 
+ 
+ 
+decoder 2 and 4 entity decoder2and4_2 is     Port ( a : in  STD_LOGIC;            b : in  STD_LOGIC;            d0: out  STD_LOGIC;   d1: out  STD_LOGIC; d2: out  STD_LOGIC;  d3: out  STD_LOGIC); end decoder2and4_2; 
+ 
+architecture Behavioral of decoder2and4_2 is 
+ 
+begin d0<=((not b)and(not a)); d1<=((not b)and a); d2<=(b and (not a)); d3<=(b and a); 
+ 
+end Behavioral; encoder  4and 2 behaviral library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. 
+--library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity encoder4and2_2 is     Port ( y0 : in  STD_LOGIC;            y1 : in  STD_LOGIC;            y2 : in  STD_LOGIC;            y3 : in  STD_LOGIC;            a1 : out  STD_LOGIC; 
+           a0 : out  STD_LOGIC); 
+end encoder4and2_2; 
+ 
+architecture Behavioral of encoder4and2_2 is 
+ 
+begin 
+ 
+a1<=y3 or y2; a0<=y3 or y1; end Behavioral; encoder 2 aqnd 4 stru entity encoder4and2_struct is 
+    Port ( y : in  STD_LOGIC_vector(3 downto 0);  a : out  STD_LOGIC_vector(1 downto 0)); end encoder4and2_struct; 
+ 
+ 
+ 
+ 
+ 
+architecture Behavioral of encoder4and2_struct is 
+ 
+ 
+component or_2 
+        Port ( a,b : in STD_LOGIC; y : out STD_LOGIC ); 
+end component; 
+ 
+ 
+begin j1:or_2 port map(y(3),y(2),a(1)); j2:or_2 port map(y(3),y(1),a(0)); end; mux 8 and 1struct 
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. 
+--library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity mux8and1_stru is 
+    Port ( d : in  STD_LOGIC_vector(7 downto 0);t : in  STD_LOGIC_vector(2 downto 0);            y : out  STD_LOGIC); 
+end mux8and1_stru; 
+ 
+architecture structural of mux8and1_stru is 
+component mux2and1_2 
+    Port ( i0,i1,s: in  STD_LOGIC;  cout: out  STD_LOGIC); 
+end component; 
+signal r0,r2,r3,r4,r5,r6:std_logic; 
+ 
+ 
+begin j1: mux2and1_2  port map(d(0),d(1),t(2),r0); j2: mux2and1_2  port map(d(2),d(3),t(2),r2); j3: mux2and1_2  port map(d(4),d(5),t(2),r3); 
+ 
+j4: mux2and1_2  port map(d(6),d(7),t(2),r4); 
+ 
+j5: mux2and1_2  port map(r0,r2,t(1),r5); 
+ 
+j6: mux2and1_2  port map(r3,r4,t(1),r6); 
+ 
+j7: mux2and1_2  port map(r5,r6,t(0),y); 
+ 
+ 
+end ; 
+parallel addar and sub strct library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+entity paralladdarandsub_stru is 
+    Port (a, b:in std_logic_vector(3 downto 0); cin:in std_logic; s:out std_logic_vector(3 downto 0);cout3:out std_logic); 
+end paralladdarandsub_stru; 
+ 
+architecture structural of paralladdarandsub_stru is 
+ 
+component fulladder_stru 
+    Port ( x1,y1,z1 : in  STD_LOGIC;sum ,carry: out  STD_LOGIC); end component; 
+ 
+component xor_2 
+Port ( a ,b: in  STD_LOGIC; y : out  STD_LOGIC); 
+end component; 
+ 
+signal r0,r1,r2,r3,r4,r5,r6:std_logic; 
+ 
+ 
+begin j1:xor_2 port map(cin,b(0),r3); j2:xor_2 port map(cin,b(1),r4); j3:xor_2 port map(cin,b(2),r5); 
+ 
+j4:xor_2 port map(cin,b(3),r6); 
+ 
+ 
+j5:fulladder_stru port map(a(0),r3,cin,s(0),r0); 
+ 
+j6:fulladder_stru port map(a(1),r4,r0,s(1),r1); j7:fulladder_stru port map(a(2),r5,r1,s(2),r2); j8:fulladder_stru port map(a(3),r6,r2,s(3),cout3); 
+ 
+end ; 
+2 and 1 mux data flow model 
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. 
+--library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity mux2and1_2 is     Port ( i0 : in  STD_LOGIC;            i1 : in  STD_LOGIC;            s : in  STD_LOGIC;            cout : out  STD_LOGIC); end mux2and1_2; 
+ 
+architecture Behavioral of mux2and1_2 is 
+ 
+begin 
+cout<=(i0 and s)or(i1 and  (not s)); 
+ 
+end Behavioral; full adder struct library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+ 
+-- Uncomment the following library declaration if using 
+-- arithmetic functions with Signed or Unsigned values 
+--use IEEE.NUMERIC_STD.ALL; 
+ 
+-- Uncomment the following library declaration if instantiating -- any Xilinx primitives in this code. 
+--library UNISIM; 
+--use UNISIM.VComponents.all; 
+ 
+entity fulladder_stru is     Port ( x1 : in  STD_LOGIC;            y1 : in  STD_LOGIC;            z1 : in  STD_LOGIC;            sum : out  STD_LOGIC;            carry : out  STD_LOGIC); 
+end fulladder_stru; 
+ 
+architecture structural of fulladder_stru is 
+ 
+ 
+component halfadder_stru 
+Port ( x,t: in  STD_LOGIC; s,c: out  STD_LOGIC);  end component; 
+  
+component or_2 
+Port ( a,b: in  STD_LOGIC ; y: out  STD_LOGIC);  end component; 
+  
+  
+  
+ signal s1,s2,s3:std_logic; 
+  
+  
+  
+begin 
+ 
+ 
+ 
+t1: halfadder_stru port map (x1,y1,s1,s2); t2: halfadder_stru port map (s1,z1,sum,s3); t3:or_2 port map (s2,s3,carry); 
+ 
+ 
+end ; 
+ 
+ 
+ 
+
