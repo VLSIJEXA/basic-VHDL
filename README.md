@@ -1,1 +1,1 @@
-# basic-verilog
+# basic-VHDL
