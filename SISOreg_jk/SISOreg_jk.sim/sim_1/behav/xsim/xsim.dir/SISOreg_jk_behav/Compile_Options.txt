@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "SISOreg_jk_behav" "xil_defaultlib.SISOreg_jk" -log "elaborate.log" 
