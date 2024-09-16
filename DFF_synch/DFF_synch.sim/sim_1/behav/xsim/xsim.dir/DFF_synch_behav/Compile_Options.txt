@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "DFF_synch_behav" "xil_defaultlib.DFF_synch" -log "elaborate.log" 
