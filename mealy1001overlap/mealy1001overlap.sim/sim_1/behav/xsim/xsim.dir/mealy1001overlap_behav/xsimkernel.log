@@ -1,0 +1,4 @@
+Running: xsim.dir/mealy1001overlap_behav/xsimk.exe -simmode gui -wdb mealy1001overlap_behav.wdb -simrunnum 0 -socket 58679
+Design successfully loaded
+Design Loading Memory Usage: 8296 KB (Peak: 8296 KB)
+Design Loading CPU Usage: 30 ms

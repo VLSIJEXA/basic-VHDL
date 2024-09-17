@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "mealy1001overlap_behav" "xil_defaultlib.mealy1001overlap" -log "elaborate.log" 
