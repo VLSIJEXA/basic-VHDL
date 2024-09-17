@@ -2,3 +2,6 @@ Running: xsim.dir/mealy1001overlap_behav/xsimk.exe -simmode gui -wdb mealy1001ov
 Design successfully loaded
 Design Loading Memory Usage: 8296 KB (Peak: 8296 KB)
 Design Loading CPU Usage: 30 ms
+Simulation completed
+Simulation Memory Usage: 8748 KB (Peak: 8748 KB)
+Simulation CPU Usage: 46 ms
