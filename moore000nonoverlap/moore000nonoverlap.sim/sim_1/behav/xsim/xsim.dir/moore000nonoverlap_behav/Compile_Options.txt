@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "moore000nonoverlap_behav" "xil_defaultlib.moore000nonoverlap" -log "elaborate.log" 

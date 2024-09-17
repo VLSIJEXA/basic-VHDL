@@ -1,0 +1,4 @@
+Running: xsim.dir/moore000nonoverlap_behav/xsimk.exe -simmode gui -wdb moore000nonoverlap_behav.wdb -simrunnum 0 -socket 59844
+Design successfully loaded
+Design Loading Memory Usage: 7580 KB (Peak: 7580 KB)
+Design Loading CPU Usage: 31 ms
